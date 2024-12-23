@@ -26,3 +26,30 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+
+    file = 'files/input/data.csv'
+    with open(file, mode='r', newline='', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    letras = []
+    letras_dict={}
+    for line in lines:
+        columns = line.strip().split('\t')
+        if len(columns) > 4:
+            trp = columns[4].split(",")
+            for code in trp: 
+                tup = code.split(":")
+                letras.append((tup[0],int(tup[1]))) 
+    letras = sorted(letras, key=lambda x: x[0])
+    
+    
+    for letra, valor in letras:
+        if letra not in letras_dict:
+            letras_dict[letra] = {'max': valor, 'min': valor}
+        else:
+            letras_dict[letra]['max'] = max(letras_dict[letra]['max'], valor)
+            letras_dict[letra]['min'] = min(letras_dict[letra]['min'], valor)
+    
+    return [(letra, num['min'], num['max']) for letra, num in letras_dict.items()]
+
+print(pregunta_06())

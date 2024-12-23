@@ -27,3 +27,26 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+
+    file = 'files/input/data.csv'
+    with open(file, mode='r', newline='', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    letras = []
+    num = {}
+    for line in lines:
+        columns = line.strip().split('\t')
+        if len(columns) > 0:
+            letras.append((columns[0],int(columns[1]))) 
+    letras = sorted(letras, key=lambda x: x[0])
+    
+    for letra, valor in letras:
+        if valor not in num: 
+            num[valor] = [letra]
+        else:
+            if letra not in num[valor]:
+                num[valor].append(letra)
+        
+    return sorted(num.items())
+
+print(pregunta_08())

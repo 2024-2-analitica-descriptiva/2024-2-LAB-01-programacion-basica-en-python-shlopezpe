@@ -15,3 +15,25 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    file = 'files/input/data.csv'
+    with open(file, mode='r', newline='', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    letras = []
+    conteo = {}    
+    for line in lines:
+        columns = line.strip().split('\t')
+        if len(columns) > 0:
+            letras.append((columns[0],int(columns[1]))) 
+    letras = sorted(letras, key=lambda x: x[0])
+    
+    for key, value in letras: 
+        if key in conteo:
+            conteo[key] += value
+        else:
+            conteo[key] = value        
+    
+
+    return list(conteo.items())
+            
+print(pregunta_03())

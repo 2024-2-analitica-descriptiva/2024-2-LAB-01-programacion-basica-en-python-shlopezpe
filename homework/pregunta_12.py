@@ -15,3 +15,27 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+
+    file = 'files/input/data.csv'
+    with open(file, mode='r', newline='', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    letras = []
+    conteo = {}
+    for line in lines:
+        columns = line.strip().split('\t')
+        if len(columns) > 4:
+            trp = columns[4].split(",")
+            for value in trp: 
+                num = value.split(":")
+                letras.append((columns[0], int(num[1])))
+    
+    for key, val in letras: 
+        if key in conteo: 
+            conteo[key] += val
+        else: 
+            conteo[key] = val 
+     
+    return conteo
+
+print(pregunta_12())

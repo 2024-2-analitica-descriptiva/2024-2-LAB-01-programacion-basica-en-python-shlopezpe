@@ -20,3 +20,21 @@ def pregunta_10():
 
 
     """
+
+    file = 'files/input/data.csv'
+    
+    with open(file, mode='r', newline='', encoding='utf-8') as file:
+        lines = file.readlines()
+        
+    
+    letras = []
+    for line in lines:
+        columns = line.strip().split('\t')
+        if len(columns) > 0:
+            letra = columns[0]
+            lt_c = len(columns[3].split(","))
+            code = len(columns[4].split(","))
+            letras.append((letra,lt_c,code))
+    return letras
+    
+print(pregunta_10())
